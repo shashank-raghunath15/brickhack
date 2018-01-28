@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 // import { AngularFireModule } from 'angularfire2';
@@ -45,6 +45,10 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule.forRoot([{
       path: 'recipe', component: RecipeComponent
+    },
+    { path: 'login', component: LoginComponent },
+    {
+      path: 'signUp', component: SignUpComponent
     }])
   ],
   providers: [LoginService, SignupService, RecipeService],

@@ -10,7 +10,7 @@ export class LoginService {
   }
 
   login(logIn: Login) {
-    return this.Http.post(' ', logIn);
+    return this.Http.post('http://localhost:8080/login', logIn);
   }
 
 }

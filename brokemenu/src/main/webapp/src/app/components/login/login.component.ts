@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   logIn(logIn: Login) {
     this.loginService.login(logIn).subscribe((user: User) => {
       localStorage.setItem('user', JSON.stringify(user));
+      console.log(user);
     });
   }
 
