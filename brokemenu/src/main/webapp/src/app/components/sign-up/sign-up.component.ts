@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Signup } from "../../models/sign-up";
-import { SignupService} from "../../services/signup.service";
+import { Signup } from '../../models/signup';
+import { SignupService } from '../../services/signup.service';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,15 +10,15 @@ import { SignupService} from "../../services/signup.service";
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private SignupService:SignupService) {
+  constructor(private signupService: SignupService) {
   }
 
   ngOnInit() {
   }
 
-  signUp(Signup:signUp){
-    this.SignupService.signUp(Signup).subscribe((user: User)=>{
-      localStorage.setItem("user", user);
+  signUp(user: User) {
+    this.signupService.signUp(user).subscribe((res: User) => {
+      console.log(res);
     });
   }
 

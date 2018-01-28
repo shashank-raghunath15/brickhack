@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClient } from "@angular/common/http";
-import { Login } from "../models/login";
+import { HttpClient } from '@angular/common/http';
+import { Login } from '../models/login';
 
 @Injectable()
 export class LoginService {
@@ -9,8 +9,8 @@ export class LoginService {
 
   }
 
-  login(logIn:Login){
-    return this.Http.post(logIn);
+  login(logIn: Login) {
+    return this.Http.post(' ', logIn);
   }
 
 }

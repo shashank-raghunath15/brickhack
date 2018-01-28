@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClient } from "@angular/common/http";
-import { Signup } from "../models/Signup";
+import { HttpClient } from '@angular/common/http';
+import { User } from '../models/User';
 
 @Injectable()
 export class SignupService {
 
-  constructor(private Htpp: HttpClient) {
+  constructor(private Http: HttpClient) {
 
   }
 
-  Signup(Signup:Signup){
-    return this.Http.post(Signup);
+  signUp(user: User) {
+    return this.Http.post('http://localhost:8080/signUp', user);
   }
 
 }
