@@ -1,68 +1,11 @@
-<!-- <app-navbar></app-navbar>
-<app-sign-up></app-sign-up>
-
-
-<!doctype html>
-<html>
-
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <link type="text/css" rel="stylesheet" href="common.css">
-  <title>Angular file upload sample</title>
-
-  <script type="text/javascript">
-    FileAPI = {
-      debug: true,
-      //forceLoad: true, html5: false //to debug flash in HTML5 browsers
-      //wrapInsideDiv: true, //experimental for fixing css issues
-      //only one of jsPath or jsUrl.
-      //jsPath: '/js/FileAPI.min.js/folder/',
-      //jsUrl: 'yourcdn.com/js/FileAPI.min.js',
-
-      //only one of staticPath or flashUrl.
-      //staticPath: '/flash/FileAPI.flash.swf/folder/'
-      //flashUrl: 'yourcdn.com/js/FileAPI.flash.swf'
-    };
-  </script>
-
-<!--
-<div class="upload-div">
-  <div class="edit-div">
-    <a ng-click="showEdit = !showEdit" href="javascript:void(0)">+ edit upload html</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a ng-show="showEdit" ng-click="confirm() && (editHtml = defaultHtml)" href="javascript:void(0)">reset to
-      default</a><br/><br/>
-
-    <div ng-show="showEdit" id="htmlEdit"></div>
+<form>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input ngModel name="title" #title="ngModel" (change)="log(title)" id="title" type ="text" class="form-control">
   </div>
-  -->
-
-<div class="upload-buttons">
-  <div id="editArea">
-    <div>
-      <div>
-        <form name="myForm">
-          <fieldset>
-            <legend>Upload on form submit</legend>
-            Title:
-            <input type="text" name="userName" ng-model="title" size="39" required>
-            <i ng-show="myForm.myTitle.$error.required">*required</i>
-            <br> Description:
-            <input type="text" name="Description" ng-model="description" size="99" required>
-            <i ng-show="myForm.myDescription.$error.required">*required</i>
-            <br> Choose a thumbnail:
-            <input type="file" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" required>
-            <i ng-show="myForm.file.$error.required">*required</i>
-            <br/>
-
-            <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
-            <img ngf-src="picFile" class="thumb">
-            <span class="progress" ng-show="picFile.progress >= 0">
-              <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
-            </span>
-            <span ng-show="picFile.result">Upload Successful</span>
-          </fieldset>
-          <br/>
-        </form>
-      </div>
-    </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea ngModel name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button type="button">Submit!</button>
+</form>
