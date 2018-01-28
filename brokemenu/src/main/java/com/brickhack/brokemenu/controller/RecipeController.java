@@ -47,4 +47,9 @@ public class RecipeController extends Controller{
 	{
 		getRecipeService().addLike(id);
 	}
+	
+	@GetMapping("/getAllRecipes")
+	public List<Recipe> getAllRecipes(){
+		return getRecipeService().getAll();
+	}
 }

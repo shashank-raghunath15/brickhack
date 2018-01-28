@@ -45,4 +45,9 @@ public class RecipeServiceImpl extends ServiceImpl implements RecipeService{
 		getRecipeRepository().save(recipe);
 	}
 
+	@Override
+	public List<Recipe> getAll() {
+		return getRecipeRepository().findAll();
+	}
+
 }

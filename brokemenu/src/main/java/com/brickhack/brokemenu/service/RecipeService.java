@@ -20,4 +20,6 @@ public interface RecipeService {
 
 	void addRecipe(Recipe recipe);
 
+	List<Recipe> getAll();
+
 }
