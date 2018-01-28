@@ -1,52 +1,93 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan 27 15:14:23 2018
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from flask import Flask
+from flask import json
+from flask import request
+import re
+import nltk
+#nltk.download('stopwords')
+from nltk.corpus import stopwords
+from nltk.stem.porter import PorterStemmer
 
-@author: Ankesh N. Bhoi
-"""
 
 
+app = Flask(__name__)
 
-import requests
-from bs4 import BeautifulSoup
-import operator
 
-def start(url):
-    word_list=[]
-    source_code=requests.get(url).text
-    soup=BeautifulSoup(source_code)
-    for text in soup.findAll('a',{'class':'resource food'}):
-        maal=text.string
-        words=maal.lower().split()
-        for each_word in words:
-            word_list.append(each_word)
-            print(each_word)
-    print(len(word_list))
-    clean_up_list(word_list)
-    
-def clean_up_list(wl):
-    clean_wl=[]
-    for wrd in wl:
-        smb="~!@#$%^&*()_+-=[];',./{}}:/\">?<1234567890"
-        for i in range(0,len(smb)):
-            wrd = wrd.replace(smb[i],"")
-        if (len(wrd)>0):
-            clean_wl.append(wrd)
-    print(clean_wl)
-    dict(clean_wl)
+@app.route('/items', methods=("POST",))
+def foodlist():       
+        dataset = pd.read_csv('Book1.csv')
+        X = dataset.iloc[:, :].values
+        x=X.tolist()
 
-def dict(cln_wl):
-    dictonary={}
-    for wd in cln_wl:
-        if wd in dictonary:
-            dictonary[wd]+=1
-        else:
-            dictonary[wd]=1
-    
-    for key , val in sorted(dictonary.items(),key=operator.itemgetter(1)):
-        print (key,val)             
+#text="Finely grind the cereal and bagel chips in a food processor and transfer to a large resealable plastic bag. Add 3 teaspoons olive oil, the paprika, 2 teaspoons salt, and pepper to taste and toss." 
+#text="Combine chipotle powder, garlic powder, cinnamon, and onion powder in a small bowl.Pat pineapple rings dry.Heat 1 teaspoon olive oil in a large, nonstick saucepan over medium-high heat. Add pineapple rings and red onion; sprinkle with 3 tablespoons reserved pineapple juice and brown sugar. Cook until pineapple is lightly browned, about 3 minutes per side. Transfer pineapple-onion mixture to a plate.Pat pork chops dry and lightly season both sides with salt and pepper.Transfer chops onto a plate and top with the pineapple-onion mixture. Sprinkle goat cheese on top."
+#text=input().strip()
+# Cleaning the texts
+        #text='pineapple cucumber'
+        data = request.form
+        text = data['txt']
+        #import nltk
         
+        
+        #from nltk.stem.porter import PorterStemmer
+        
+        
+        inp = re.sub('[^a-zA-Z]', ' ', text)
+        inp = inp.lower()
+        inp = inp.split()
+        #ps = PorterStemmer()
+        #inp = [ps.stem(word) for word in inp if word not in set(stopwords.words('english'))]
+        
+        ingredients=[item for sublist in x for item in sublist]
+        items=[]
+        
+        for i in ingredients:
+            r = re.sub('[^a-zA-Z]', ' ', i)
+            r = r.lower()
+        #    ps = PorterStemmer()
+        #    inp = [ps.stem(word) for word in inp if word not in set(stopwords.words('english'))]
+            inp = [word for word in inp if word not in set(stopwords.words('english'))]
+            items.append(r)
+        
+        food=[]    
+        for i in range(len(inp)):
+            if inp[i] in items:
+                food.append(inp[i])
+        food=list(set(food))       
+        if 'olive' in food:
+            if 'oil' in food:
+                food.remove('olive')
+                food.remove('oil')
+                food.append('olive oil')
+                
+        if 'powder'  in inp:
             
+            wp=[]
+            for i, j in enumerate(inp):
+                if j == 'powder':
+                    wp=i-1
+                    if inp[wp] in food:
+                        food.remove(inp[wp])
+                    
+                    food.append(inp[wp]+' powder')
+        
+        if 'spray'  in inp:
             
-
-start("http://www.bbc.com/food/ingredients/by/letter/c")
+            wp=[]
+            for i, j in enumerate(inp):
+                if j == 'spray':
+                    wp=i-1
+                    if inp[wp] in food:
+                        food.remove(inp[wp])
+                    
+                    food.append(inp[wp]+' spray')          
+        food=list(set(food))
+        print(inp)	
+        print(food)	
+        
+        return json.dumps(food)
+        
+if __name__ == '__main__':
+    app.run()
