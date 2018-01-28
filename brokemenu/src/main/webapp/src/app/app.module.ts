@@ -22,6 +22,8 @@ import { LoginService } from './services/login.service';
 import { SignupService } from './services/signup.service';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { RecipeService } from './services/recipe.service';
+import { FeedComponent } from './components/feed/feed.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { RecipeService } from './services/recipe.service';
     AppNavbarComponent,
     LoginComponent,
     SignUpComponent,
-    RecipeComponent
+    RecipeComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
