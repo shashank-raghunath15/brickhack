@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 
+
 // import { AngularFireModule } from 'angularfire2';
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
 // import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -19,6 +20,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LoginService } from './services/login.service';
 import { SignupService } from './services/signup.service';
+import { RecipeComponent } from './components/recipe/recipe.component';
+import { RecipeService } from './services/recipe.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { SignupService } from './services/signup.service';
     // UserComponent,
     AppNavbarComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { SignupService } from './services/signup.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [LoginService, SignupService],
+  providers: [LoginService, SignupService, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
