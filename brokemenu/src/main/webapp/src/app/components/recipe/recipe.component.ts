@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../models/recipe';
+import { User } from '../../models/User';
+import { Comment } from '../../models/comment';
 
 @Component({
   selector: 'app-recipe',
@@ -8,9 +11,28 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RecipeComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  private recipe: Recipe;
+  private user: User;
 
-  ngOnInit() {
+  constructor(private recipeService: RecipeService) {
+    recipeService.getRecipe(1).subscribe((recipe: Recipe) => {
+      console.log(recipe);
+      this.recipe = recipe;
+    });
   }
 
+  ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
+
+  like(id: number) {
+    this.recipeService.like(id).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+  comment(comment: Comment) {
+    this.recipeService.comment(comment).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
 }

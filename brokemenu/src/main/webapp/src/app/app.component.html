@@ -1,17 +1,17 @@
 <app-navbar></app-navbar>
-<!-- <app-sign-up></app-sign-up> -->
 
 <!-- From: view-source:http://getbootstrap.com/docs/4.0/examples/starter-template/ -->
 
-<!-- <main role="main" class="container">
+<main role="main" class="container">
 
   <div class="starter-template">
     <h1>Welcome to brokemenu.com</h1>
     <p class="lead">brokemenu.com is a website that connects people to cheap meals, that are rich in taste.<br>Have a recipe you want to share? Sign up today!</p>
   </div>
 
-</main> -->
-<h1>Hello</h1>
+</main>
 <div *ngFor="let recipe of recipes">
+  <a routerLink="/recipe"></a>
+  <p>{{recipe.id}}</p>
   <p>{{ recipe.description }}</p>
 </div>

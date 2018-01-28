@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,7 +24,7 @@ public class Recipe {
 	@ElementCollection
 	private List<String> ingredients = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "comment")
+	@OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
 	private List<Comment> comments = new ArrayList<>();
 
 	private long likeCount;
@@ -65,6 +66,22 @@ public class Recipe {
 
 	public void setIngredients(List<String> ingredients) {
 		this.ingredients = ingredients;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

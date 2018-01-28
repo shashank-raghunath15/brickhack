@@ -23,7 +23,7 @@ import { SignupService } from './services/signup.service';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { RecipeService } from './services/recipe.service';
 import { FeedComponent } from './components/feed/feed.component';
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,10 @@ import { FeedComponent } from './components/feed/feed.component';
     // AngularFireAuthModule,
     // NgbModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([{
+      path: 'recipe', component: RecipeComponent
+    }])
   ],
   providers: [LoginService, SignupService, RecipeService],
   bootstrap: [AppComponent]

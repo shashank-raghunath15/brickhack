@@ -16,7 +16,7 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private long comment;
+	private String comment;
 	
 	private String username;
 	
@@ -34,12 +34,22 @@ public class Comment {
 		this.id = id;
 	}
 
-	public long getComment() {
+
+
+	public String getComment() {
 		return comment;
 	}
 
-	public void setComment(long comment) {
+	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
 	}
 
 	public String getUsername() {
