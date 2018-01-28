@@ -9,6 +9,6 @@ export class RecipeService {
   constructor(private http: HttpClient) { }
 
   getAllRecipies(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>('http://localhost:8080/getAllRecipies');
+    return this.http.get<Recipe[]>('http://localhost:8080/getAllRecipes');
   }
 }
